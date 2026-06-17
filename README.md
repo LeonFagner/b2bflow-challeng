@@ -57,8 +57,9 @@ terminal → logs do resultado
 
 ### 1. Clone o repositório
 
-git clone https://github.com/LeonFagner/b2bflow-challenge.git  
+git clone https://github.com/LeonFagner/b2bflow-challeng.git  
 cd b2bflow-challenge  
+
 
 ---
 
