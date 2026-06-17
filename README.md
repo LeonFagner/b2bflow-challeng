@@ -1,96 +1,155 @@
-# Supabase + Z-API Challenge
+# 🚀 Supabase + Z-API Challenge
 
-Aplicação Python que busca contatos no Supabase e envia mensagens personalizadas via WhatsApp usando a Z-API.
+Uma automação simples, direta e poderosa: busca contatos no Supabase e dispara mensagens personalizadas no WhatsApp usando a Z-API.
 
-## Pré-requisitos
+Pensa nisso como um mini sistema de disparo inteligente, sem planilha, sem copy manual, sem dor de cabeça.
 
-- Python 3.11+
-- Conta no [Supabase](https://supabase.com)
-- Instância ativa na [Z-API](https://z-api.io)
+---
 
-## Setup
+## ⚡ O que esse projeto faz (na prática)
 
-**1. Clone o repositório:**
-```bash
-git clone https://github.com/LeonFagner/b2bflow-challenge.git
-cd b2bflow-challenge
-```
+- Puxa contatos direto de um banco no Supabase  
+- Monta mensagens personalizadas tipo: “Olá, João tudo bem com você?”  
+- Envia tudo automaticamente via WhatsApp (Z-API)  
+- Registra o que deu certo e o que deu ruim no terminal  
 
-**2. Instale as dependências:**
-```bash
-pip install -r requirements.txt
-```
+---
 
-**3. Configure as variáveis de ambiente:**
-```bash
-cp .env.example .env
-```
-Abra o `.env` e preencha com suas credenciais (veja a seção abaixo).
+## 🧠 Ideia por trás
 
-**4. Crie a tabela no Supabase:**
+Esse projeto simula um cenário real bem comum:
 
-Acesse seu projeto no Supabase → **SQL Editor** e execute:
+“Preciso automatizar comunicação com clientes sem virar escravo de planilha.”
 
-```sql
+Ele junta:
+
+- Supabase (banco de dados na nuvem)
+- Z-API (envio de mensagens no WhatsApp)
+- Python (orquestração da automação)
+
+---
+
+## 🧱 Arquitetura do sistema
+
+Fluxo da aplicação:
+
+main.py  
+↓  
+supabase_service.py → busca contatos no banco  
+↓  
+zapi_service.py → envia mensagens via WhatsApp  
+↓  
+terminal → logs do resultado  
+
+---
+
+## 🛠️ Tecnologias usadas
+
+- Python 3.11  
+- Supabase (PostgreSQL na nuvem)  
+- Z-API (WhatsApp API)  
+- Requests  
+- python-dotenv  
+
+---
+
+## 🚀 Setup do projeto
+
+### 1. Clone o repositório
+
+git clone https://github.com/LeonFagner/b2bflow-challenge.git  
+cd b2bflow-challenge  
+
+---
+
+### 2. Instale as dependências
+
+pip install -r requirements.txt  
+
+---
+
+### 3. Configure variáveis de ambiente
+
+cp .env.example .env  
+
+Preencha o arquivo `.env`:
+
+SUPABASE_URL=your_supabase_url  
+SUPABASE_KEY=your_supabase_key  
+ZAPI_INSTANCE_ID=your_instance_id  
+ZAPI_TOKEN=your_token  
+ZAPI_CLIENT_TOKEN=your_client_token  
+
+---
+
+## 🗄️ Banco de dados (Supabase)
+
 CREATE TABLE contacts (
-    id   BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name TEXT NOT NULL,
     phone TEXT NOT NULL
 );
-```
 
-**5. Insira os contatos de teste:**
+---
 
-Ainda no SQL Editor, execute:
+## 🧪 Inserir dados de teste
 
-```sql
 INSERT INTO contacts (name, phone) VALUES
-    ('João Silva',  '5511999990001'),
-    ('Maria Souza', '5511999990002'),
-    ('Carlos Lima', '5511999990003');
-```
+('João Silva',  '5511999990001'),
+('Maria Souza', '5511999990002'),
+('Carlos Lima', '5511999990003');
 
-> O campo `phone` deve estar no formato E.164 sem o `+`: `5511999999999`  
-> (55 = Brasil, 11 = DDD, 9 dígitos do número)
+---
 
-**6. Rode o projeto:**
-```bash
-python main.py
-```
+## ▶️ Executar o projeto
 
-## Variáveis de ambiente
+python main.py  
 
-Copie `.env.example` para `.env` e preencha:
+---
 
-| Variável | Onde encontrar |
-|---|---|
-| `SUPABASE_URL` | Supabase → Project Settings → API → Project URL |
-| `SUPABASE_KEY` | Supabase → Project Settings → API → anon key (legacy/JWT) |
-| `ZAPI_INSTANCE_ID` | Painel Z-API → sua instância → ID da instância |
-| `ZAPI_TOKEN` | Painel Z-API → sua instância → Token |
-| `ZAPI_CLIENT_TOKEN` | Painel Z-API → sua instância → Client Token |
+## 💬 Resultado esperado
 
-> **Atenção:** Use a chave `anon` **legada** do Supabase (começa com `eyJ...`), não a nova chave `sb_publishable_`.
+Mensagem enviada para João Silva ✔  
+Mensagem enviada para Maria Souza ✔  
+Mensagem enviada para Carlos Lima ✔  
 
-## O que o projeto faz
+---
 
-1. Carrega as credenciais do `.env`
-2. Conecta no Supabase e busca até 3 contatos da tabela `contacts`
-3. Para cada contato, monta a mensagem: `Olá, <nome> tudo bem com você?`
-4. Envia a mensagem via Z-API (WhatsApp)
-5. Loga o resultado de cada envio no terminal
+## 🎯 Objetivo do projeto
 
-## Estrutura do projeto
+Demonstrar integração entre:
 
-```
-b2bflow-challenge/
-├── main.py                  # Orquestrador principal
-├── services/
-│   ├── __init__.py
-│   ├── supabase_service.py  # Busca de contatos no Supabase
-│   └── zapi_service.py      # Envio de mensagens via Z-API
-├── .env.example             # Modelo de variáveis de ambiente
-├── .gitignore
-├── requirements.txt
-└── README.md
-```
+- banco de dados em nuvem  
+- API externa de mensagens  
+- automação com Python  
+
+Tudo isso simulando um fluxo real de backend.
+
+
+---
+
+## 📌 Estrutura do projeto
+
+b2bflow-challenge/  
+├── main.py  
+├── services/  
+│   ├── __init__.py  
+│   ├── supabase_service.py  
+│   └── zapi_service.py  
+├── .env.example  
+├── .gitignore  
+├── requirements.txt  
+└── README.md  
+
+---
+
+## 🧠 Resumo
+
+Esse projeto é um mini sistema de automação backend que integra:
+
+- dados (Supabase)
+- API externa (Z-API)
+- lógica de envio
+- automação com Python
+
+Simples, mas com cara de produto real.
